@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum UserChoice {
-    CloseApplication("0");
+    CloseApplication("0"),
+    ReadMoviesFromFile("1"),
+    WriteMoviesFromFile("2");
 
     private final String userInput;
 

@@ -1,16 +1,16 @@
 package ru.aston.sort_app;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
+import java.util.logging.Logger;
 
-import ru.aston.sort_app.handlers.CloseApplicationHandler;
-import ru.aston.sort_app.handlers.UserChoice;
-import ru.aston.sort_app.handlers.UserChoiceHandler;
+import ru.aston.sort_app.handlers.*;
+import ru.aston.sort_app.model.Movie;
 
 public class SortApp {
     private final Map<UserChoice, UserChoiceHandler> handlerMap = new HashMap<>();
-    private final Scanner  scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
+    private final Logger logger = Logger.getLogger(SortApp.class.getName());
+    private final List<Movie> movies = new ArrayList<>();
 
     public SortApp() {
         initHandlerMap();
@@ -18,6 +18,8 @@ public class SortApp {
 
     private void initHandlerMap() {
         handlerMap.put(UserChoice.CloseApplication, new CloseApplicationHandler());
+        handlerMap.put(UserChoice.ReadMoviesFromFile, new ReadMovieFileHandler(movies));
+        handlerMap.put(UserChoice.WriteMoviesFromFile, new WriteMovieFileHandler(movies));
     }
 
     public void run() {
@@ -49,6 +51,12 @@ public class SortApp {
     }
 
     private void printMenu() {
-        System.out.printf("%s - Выход \r\n", UserChoice.CloseApplication.getUserInput());
+        StringBuilder menu = new StringBuilder();
+        menu.append("\n");
+        menu.append(UserChoice.CloseApplication.getUserInput() + " - Выход \n");
+        menu.append(UserChoice.ReadMoviesFromFile.getUserInput() + " - Загрузка из файла \n");
+        menu.append(UserChoice.WriteMoviesFromFile.getUserInput() + " - Запись в файл \n");
+
+        logger.info(menu.toString());
     }
 }
