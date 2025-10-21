@@ -9,7 +9,7 @@ class MovieTest {
     @Test
     void when_buildMovie_then_returnCorrectObject() {
 
-        Long id = 1000l;
+        Long id = 1000L;
         String name = "The passengers";
         int year = 2016;
         String director = "?Jennifer Lawrence";
@@ -48,7 +48,7 @@ class MovieTest {
 
     @Test
     void  when_buildMovieWithoutName_trowException(){
-        Long id = 1000l;;
+        Long id = 1000L;
         int year = 2016;
         String director = "?Jennifer Lawrence";
         double rate = 9d;
@@ -68,7 +68,7 @@ class MovieTest {
     @Test
     void  when_buildMovieWithIncorrectYear_trowException(){
 
-        Long id = 1000l;
+        Long id = 1000L;
         String name = "The passengers";
         int year = 0;
         String director = "?Jennifer Lawrence";

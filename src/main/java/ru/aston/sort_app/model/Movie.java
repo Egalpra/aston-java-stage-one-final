@@ -91,7 +91,7 @@ public class Movie {
         public Movie build() {
             List<String> errors = validate();
 
-            if (errors.size() > 0) {
+            if (errors.isEmpty()) {
                 throw new IllegalStateException(
                         errors.stream().collect(
                                 Collectors.joining(", ")
