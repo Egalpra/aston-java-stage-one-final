@@ -1,15 +1,15 @@
 package ru.aston.sort_app;
 
 import java.util.*;
+import java.util.logging.Logger;
 
-import ru.aston.sort_app.handlers.CloseApplicationHandler;
-import ru.aston.sort_app.handlers.UserChoice;
-import ru.aston.sort_app.handlers.UserChoiceHandler;
+import ru.aston.sort_app.handlers.*;
 import ru.aston.sort_app.model.Movie;
 
 public class SortApp {
     private final Map<UserChoice, UserChoiceHandler> handlerMap = new HashMap<>();
-    private final Scanner  scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
+    private final Logger logger = Logger.getLogger(SortApp.class.getName());
     private final List<Movie> movies = new ArrayList<>();
 
     public SortApp() {
@@ -18,6 +18,10 @@ public class SortApp {
 
     private void initHandlerMap() {
         handlerMap.put(UserChoice.CloseApplication, new CloseApplicationHandler());
+        handlerMap.put(UserChoice.ReadMoviesFromFile, new ReadMovieFileHandler(movies));
+        handlerMap.put(UserChoice.WriteMoviesFromFile, new WriteMovieFileHandler(movies));
+        handlerMap.put(UserChoice.SortMovies, new SortHandler(movies));
+        handlerMap.put(UserChoice.BinarySearch, new BinarySearchHandler(movies));
     }
 
     public void run() {
@@ -49,6 +53,16 @@ public class SortApp {
     }
 
     private void printMenu() {
-        System.out.printf("%s - Выход \r\n", UserChoice.CloseApplication.getUserInput());
+        StringBuilder menu = new StringBuilder();
+        menu.append("\n=== Главное меню ===");
+        menu.append("\n" + UserChoice.CloseApplication.getUserInput() + " - Выход");
+        menu.append("\n" + UserChoice.ReadMoviesFromFile.getUserInput() + " - Загрузка из файла");
+        menu.append("\n" + UserChoice.WriteMoviesFromFile.getUserInput() + " - Запись в файл");
+        menu.append("\n" + UserChoice.SortMovies.getUserInput() + " - Сортировка фильмов");
+        menu.append("\n" + UserChoice.BinarySearch.getUserInput() + " - Бинарный поиск фильмов");
+        menu.append("\n" + UserChoice.ManualFill.getUserInput() + " - Ручная запись");
+
+        System.out.println(menu);
+        logger.info(menu.toString());
     }
 }

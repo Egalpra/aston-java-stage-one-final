@@ -5,7 +5,11 @@ import java.util.Map;
 
 public enum UserChoice {
     CloseApplication("0"),
-    ManualFill("3");
+    ReadMoviesFromFile("1"),
+    WriteMoviesFromFile("2"),
+    SortMovies("3"),
+    BinarySearch("4"),
+    ManualFill("5");
 
     private final String userInput;
 
