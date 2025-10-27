@@ -22,6 +22,7 @@ public class SortApp {
         handlerMap.put(UserChoice.WriteMoviesFromFile, new WriteMovieFileHandler(movies));
         handlerMap.put(UserChoice.SortMovies, new SortHandler(movies));
         handlerMap.put(UserChoice.BinarySearch, new BinarySearchHandler(movies));
+        handlerMap.put(UserChoice.ManualFill, new ManualFillHandler(movies, scanner));
     }
 
     public void run() {
