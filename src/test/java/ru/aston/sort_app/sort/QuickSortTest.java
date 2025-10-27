@@ -30,26 +30,42 @@ class QuickSortTest {
     }
 
     @Test
-    public void testSortByName() {
-        List<Movie> booksByName = new ArrayList<>(movies);
-        QuickSort.sort(booksByName, Movie.BY_NAME);
-        movies.sort(Movie.BY_NAME);
-        assertEquals(movies, booksByName);
+    public void testSortById() {
+        List<Movie> moviesById = new ArrayList<>(movies);
+        QuickSort.sort(moviesById, Movie.BY_ID);
+        movies.sort(Movie.BY_ID);
+        assertEquals(movies, moviesById);
     }
 
     @Test
-    public void testSortByDate() {
-        List<Movie> booksByDate = new ArrayList<>(movies);
-        QuickSort.sort(booksByDate, Movie.BY_DATE);
-        movies.sort(Movie.BY_DATE);
-        assertEquals(movies, booksByDate);
+    public void testSortByName() {
+        List<Movie> moviesByName = new ArrayList<>(movies);
+        QuickSort.sort(moviesByName, Movie.BY_NAME);
+        movies.sort(Movie.BY_NAME);
+        assertEquals(movies, moviesByName);
+    }
+
+    @Test
+    public void testSortByYear() {
+        List<Movie> moviesByYear = new ArrayList<>(movies);
+        QuickSort.sort(moviesByYear, Movie.BY_YEAR);
+        movies.sort(Movie.BY_YEAR);
+        assertEquals(movies, moviesByYear);
+    }
+
+    @Test
+    public void testSortByDirector() {
+        List<Movie> moviesByDir = new ArrayList<>(movies);
+        QuickSort.sort(moviesByDir, Movie.BY_DIR);
+        movies.sort(Movie.BY_DIR);
+        assertEquals(movies, moviesByDir);
     }
 
     @Test
     public void testSortByRating() {
-        List<Movie> booksByRating = new ArrayList<>(movies);
-        QuickSort.sort(booksByRating, Movie.BY_RATE);
+        List<Movie> moviesByRating = new ArrayList<>(movies);
+        QuickSort.sort(moviesByRating, Movie.BY_RATE);
         movies.sort(Movie.BY_RATE);
-        assertEquals(movies, booksByRating);
+        assertEquals(movies, moviesByRating);
     }
 }

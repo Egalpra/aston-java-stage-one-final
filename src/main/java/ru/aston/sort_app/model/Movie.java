@@ -123,7 +123,7 @@ public class Movie {
 
     public static final Comparator<Movie> BY_ID = Comparator.comparingLong(Movie::getId);
     public static final Comparator<Movie> BY_NAME = Comparator.comparing(Movie::getName);
-    public static final Comparator<Movie> BY_DATE = Comparator.comparingInt(Movie::getYear);
+    public static final Comparator<Movie> BY_YEAR = Comparator.comparingInt(Movie::getYear);
     public static final Comparator<Movie> BY_DIR = Comparator.comparing(Movie::getDirector);
     public static final Comparator<Movie> BY_RATE = Comparator.comparingDouble(Movie::getRate);
 }
