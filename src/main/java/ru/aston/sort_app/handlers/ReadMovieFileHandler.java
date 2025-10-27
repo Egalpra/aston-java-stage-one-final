@@ -30,7 +30,6 @@ public class ReadMovieFileHandler implements UserChoiceHandler {
 
         logger.info(
                 String.format(
-                        "Добавлено %d записей\r\n", moviesToAdd.size()
-                ));
+                        "Добавлено %d записей\r\n", moviesToAdd.size()));
     }
 }

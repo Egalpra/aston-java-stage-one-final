@@ -20,6 +20,7 @@ public class SortApp {
         handlerMap.put(UserChoice.CloseApplication, new CloseApplicationHandler());
         handlerMap.put(UserChoice.ReadMoviesFromFile, new ReadMovieFileHandler(movies));
         handlerMap.put(UserChoice.WriteMoviesFromFile, new WriteMovieFileHandler(movies));
+        handlerMap.put(UserChoice.BinarySearch, new BinarySearchHandler(movies));
     }
 
     public void run() {
@@ -56,6 +57,7 @@ public class SortApp {
         menu.append(UserChoice.CloseApplication.getUserInput() + " - Выход \n");
         menu.append(UserChoice.ReadMoviesFromFile.getUserInput() + " - Загрузка из файла \n");
         menu.append(UserChoice.WriteMoviesFromFile.getUserInput() + " - Запись в файл \n");
+        menu.append(UserChoice.BinarySearch.getUserInput() + " - Бинарный поиск фильмов \n");
 
         logger.info(menu.toString());
     }
