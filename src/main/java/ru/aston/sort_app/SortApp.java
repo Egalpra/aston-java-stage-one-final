@@ -1,16 +1,16 @@
 package ru.aston.sort_app;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import ru.aston.sort_app.handlers.CloseApplicationHandler;
 import ru.aston.sort_app.handlers.UserChoice;
 import ru.aston.sort_app.handlers.UserChoiceHandler;
+import ru.aston.sort_app.model.Movie;
 
 public class SortApp {
     private final Map<UserChoice, UserChoiceHandler> handlerMap = new HashMap<>();
     private final Scanner  scanner = new Scanner(System.in);
+    private final List<Movie> movies = new ArrayList<>();
 
     public SortApp() {
         initHandlerMap();

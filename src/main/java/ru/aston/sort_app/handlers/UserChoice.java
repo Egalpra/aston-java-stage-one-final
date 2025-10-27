@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum UserChoice {
-    CloseApplication("0");
+    CloseApplication("0"),
+    ManualFill("3");
 
     private final String userInput;
 
@@ -17,6 +18,7 @@ public enum UserChoice {
     static {
         for (UserChoice choice : UserChoice.values()) {
             choiceMap.put(choice.userInput, choice);
+
         }
     }
 
