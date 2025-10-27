@@ -8,7 +8,6 @@ import ru.aston.sort_app.model.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +24,7 @@ class QuickSortTest {
                     .name("1" + i)
                     .year(1900 + i)
                     .director("2" + i)
-                    .rate((double) i)
+                    .rate(i)
                     .build());
         }
     }
