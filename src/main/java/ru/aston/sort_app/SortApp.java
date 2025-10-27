@@ -60,6 +60,7 @@ public class SortApp {
         menu.append("\n" + UserChoice.WriteMoviesFromFile.getUserInput() + " - Запись в файл");
         menu.append("\n" + UserChoice.SortMovies.getUserInput() + " - Сортировка фильмов");
         menu.append("\n" + UserChoice.BinarySearch.getUserInput() + " - Бинарный поиск фильмов");
+        menu.append("\n" + UserChoice.ManualFill.getUserInput() + " - Ручная запись");
 
         System.out.println(menu);
         logger.info(menu.toString());

@@ -8,7 +8,8 @@ public enum UserChoice {
     ReadMoviesFromFile("1"),
     WriteMoviesFromFile("2"),
     SortMovies("3"),
-    BinarySearch("4");
+    BinarySearch("4"),
+    ManualFill("5");
 
     private final String userInput;
 
@@ -21,6 +22,7 @@ public enum UserChoice {
     static {
         for (UserChoice choice : UserChoice.values()) {
             choiceMap.put(choice.userInput, choice);
+
         }
     }
 
