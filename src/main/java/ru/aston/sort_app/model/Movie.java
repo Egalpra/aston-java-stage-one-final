@@ -1,11 +1,13 @@
 package ru.aston.sort_app.model;
 
+import ru.aston.sort_app.interfaces.Comparable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Movie {
+public class Movie implements Comparable<Movie> {
     private final Long id;
     private final String name;
     private final int year;
@@ -46,14 +48,45 @@ public class Movie {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Movie movie = (Movie) o;
-        return year == movie.year && Double.compare(rate, movie.rate) == 0 && Objects.equals(id, movie.id) && Objects.equals(name, movie.name) && Objects.equals(director, movie.director);
+        return year == movie.year && Double.compare(rate, movie.rate) == 0 && Objects.equals(id, movie.id)
+                && Objects.equals(name, movie.name) && Objects.equals(director, movie.director);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, name, year, director, rate);
+    }
+
+    @Override
+    public int compareTo(Movie other) {
+        if (other == null) {
+            throw new IllegalArgumentException("Нельзя сравнивать с null");
+        }
+
+        int idComparison = Long.compare(this.id, other.id);
+        if (idComparison != 0) {
+            return idComparison;
+        }
+
+        int nameComparison = this.name.compareTo(other.name);
+        if (nameComparison != 0) {
+            return nameComparison;
+        }
+
+        int yearComparison = Integer.compare(this.year, other.year);
+        if (yearComparison != 0) {
+            return yearComparison;
+        }
+
+        int directorComparison = this.director.compareTo(other.director);
+        if (directorComparison != 0) {
+            return directorComparison;
+        }
+
+        return Double.compare(this.rate, other.rate);
     }
 
     public static class MovieBuilder {
@@ -94,8 +127,7 @@ public class Movie {
             if (errors.size() > 0) {
                 throw new IllegalStateException(
                         errors.stream().collect(
-                                Collectors.joining(", ")
-                        ));
+                                Collectors.joining(", ")));
             }
 
             return new Movie(this);
@@ -112,7 +144,7 @@ public class Movie {
                 errors.add("Название фильма обязательно");
             }
             if (this.year < 1900) {
-                errors.add("Не корректный год выпуска "  + year);
+                errors.add("Не корректный год выпуска " + year);
             }
 
             return errors;
