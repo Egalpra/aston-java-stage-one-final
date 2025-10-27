@@ -19,7 +19,7 @@ public class ManualFillHandler implements UserChoiceHandler {
         System.out.println("Введите данные фильма (для завершения ввода оставте название пустым");
         while (true) {
             try {
-                System.out.print("Название фильма (или пустая строка для"); // поправить
+                System.out.print("Название фильма (или пустая строка для завершения");
                 String name = scanner.nextLine().trim();
                 if (name.isEmpty()) {
                     LOGGER.info("Ручной ввод данных о фильмах завершен");
