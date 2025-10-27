@@ -20,6 +20,8 @@ public class SortApp {
         handlerMap.put(UserChoice.CloseApplication, new CloseApplicationHandler());
         handlerMap.put(UserChoice.ReadMoviesFromFile, new ReadMovieFileHandler(movies));
         handlerMap.put(UserChoice.WriteMoviesFromFile, new WriteMovieFileHandler(movies));
+        handlerMap.put(UserChoice.SortMovies, new SortHandler(movies));
+        handlerMap.put(UserChoice.BinarySearch, new BinarySearchHandler(movies));
     }
 
     public void run() {
@@ -52,11 +54,14 @@ public class SortApp {
 
     private void printMenu() {
         StringBuilder menu = new StringBuilder();
-        menu.append("\n");
-        menu.append(UserChoice.CloseApplication.getUserInput() + " - Выход \n");
-        menu.append(UserChoice.ReadMoviesFromFile.getUserInput() + " - Загрузка из файла \n");
-        menu.append(UserChoice.WriteMoviesFromFile.getUserInput() + " - Запись в файл \n");
+        menu.append("\n=== Главное меню ===");
+        menu.append("\n" + UserChoice.CloseApplication.getUserInput() + " - Выход");
+        menu.append("\n" + UserChoice.ReadMoviesFromFile.getUserInput() + " - Загрузка из файла");
+        menu.append("\n" + UserChoice.WriteMoviesFromFile.getUserInput() + " - Запись в файл");
+        menu.append("\n" + UserChoice.SortMovies.getUserInput() + " - Сортировка фильмов");
+        menu.append("\n" + UserChoice.BinarySearch.getUserInput() + " - Бинарный поиск фильмов");
 
+        System.out.println(menu);
         logger.info(menu.toString());
     }
 }
