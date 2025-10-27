@@ -16,45 +16,45 @@ public class ManualFillHandler implements UserChoiceHandler {
     @Override
     public void handle() {
         LOGGER.info("Начало ручного ввода данных о фильмах");
-        System.out.println("Введите данные фильма (для завершения ввода оставте название пустым");
+        LOGGER.info("Введите данные фильма (для завершения ввода оставте название пустым");
         while (true) {
             try {
-                System.out.print("Название фильма (или пустая строка для завершения");
+                LOGGER.info("Название фильма (или пустая строка для завершения");
                 String name = scanner.nextLine().trim();
                 if (name.isEmpty()) {
                     LOGGER.info("Ручной ввод данных о фильмах завершен");
                     break;
                 }
-                System.out.print("ID фильма: ");
+                LOGGER.info("ID фильма: ");
                 String idInput = scanner.nextLine().trim();
                 Long id;
                 try {
                     id = Long.parseLong(idInput);
                 } catch (NumberFormatException e) {
                     LOGGER.warning("Неверный формат ID: " + idInput);
-                    System.out.println("Ошибка: ID должен быть числом");
+                    LOGGER.info("Ошибка: ID должен быть числом");
                     continue;
                 }
-                System.out.print("Год выпуска: ");
+                LOGGER.info("Год выпуска: ");
                 String yearInput = scanner.nextLine().trim();
                 int year;
                 try {
                     year = Integer.parseInt(yearInput);
                 } catch (NumberFormatException e) {
                     LOGGER.warning("Неверный формат года: " + yearInput);
-                    System.out.println("Ошибка: Год должен быть числом");
+                    LOGGER.info("Ошибка: Год должен быть числом");
                     continue;
                 }
-                System.out.print("Режиссер: ");
+                LOGGER.info("Режиссер: ");
                 String director = scanner.nextLine().trim();
-                System.out.print("Рейтинг: ");
+                LOGGER.info("Рейтинг: ");
                 String rateInput = scanner.nextLine().trim();
                 double rate;
                 try {
                     rate = Double.parseDouble(rateInput);
                 } catch (NumberFormatException e) {
                     LOGGER.warning("Неверный формат рейтинга: " + rateInput);
-                    System.out.println("Ошибка: Рейтинг должен быть числом");
+                    LOGGER.info("Ошибка: Рейтинг должен быть числом");
                     continue;
                 }
                 Movie movie = Movie.builder()
@@ -66,13 +66,13 @@ public class ManualFillHandler implements UserChoiceHandler {
                         .build();
                 movies.add(movie);
                 LOGGER.info("Добавлен фильм: " + movie.getName());
-                System.out.println("Фильм успешно добавлен: " + movie.getName());
+                LOGGER.info("Фильм успешно добавлен: " + movie.getName());
             } catch (IllegalStateException e) {
                 LOGGER.severe("Ошибка валидации: " + e.getMessage());
-                System.out.println("Ошибка валидации: " + e.getMessage());
+                LOGGER.info("Ошибка валидации: " + e.getMessage());
             } catch (Exception e) {
                 LOGGER.severe("Непредвиденная ошибка: " + e.getMessage());
-                System.out.println("Произошла ошибка: " + e.getMessage());
+                LOGGER.info("Произошла ошибка: " + e.getMessage());
             }
         }
     }
