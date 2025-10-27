@@ -15,7 +15,6 @@ class BinarySearchTest {
     void setUp() {
         binarySearch = new BinarySearch<>();
 
-        // Создаем отсортированный массив фильмов по ID
         movies = new Movie[] {
                 Movie.builder().id(1L).name("Фильм 1").year(2020).director("Режиссер 1").rate(8.5).build(),
                 Movie.builder().id(2L).name("Фильм 2").year(2021).director("Режиссер 2").rate(7.8).build(),
@@ -115,7 +114,6 @@ class BinarySearchTest {
 
     @Test
     void testFindFirstWithDuplicates() {
-        // Создаем массив с дубликатами
         Movie[] moviesWithDuplicates = new Movie[] {
                 Movie.builder().id(1L).name("Фильм 1").year(2020).director("Режиссер 1").rate(8.5).build(),
                 Movie.builder().id(2L).name("Фильм 2").year(2021).director("Режиссер 2").rate(7.8).build(),
@@ -133,7 +131,6 @@ class BinarySearchTest {
 
     @Test
     void testFindLastWithDuplicates() {
-        // Создаем массив с дубликатами
         Movie[] moviesWithDuplicates = new Movie[] {
                 Movie.builder().id(1L).name("Фильм 1").year(2020).director("Режиссер 1").rate(8.5).build(),
                 Movie.builder().id(2L).name("Фильм 2").year(2021).director("Режиссер 2").rate(7.8).build(),

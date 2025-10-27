@@ -2,6 +2,8 @@ package ru.aston.sort_app.utils;
 
 import ru.aston.sort_app.interfaces.Comparable;
 
+import java.util.Comparator;
+
 public class BinarySearch<T extends Comparable<T>> {
 
     public int search(T[] array, T target) {
@@ -20,6 +22,35 @@ public class BinarySearch<T extends Comparable<T>> {
             int mid = left + (right - left) / 2;
 
             int comparison = array[mid].compareTo(target);
+
+            if (comparison == 0) {
+                return mid;
+            } else if (comparison < 0) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return -1;
+    }
+
+    public int search(T[] array, T target, Comparator<T> comparator) {
+        if (array == null) {
+            throw new IllegalArgumentException("Массив не может быть null");
+        }
+
+        if (target == null) {
+            throw new IllegalArgumentException("Искомый элемент не может быть null");
+        }
+
+        int left = 0;
+        int right = array.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            int comparison = comparator.compare(array[mid], target);
 
             if (comparison == 0) {
                 return mid;

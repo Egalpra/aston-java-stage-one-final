@@ -1,8 +1,9 @@
 package ru.aston.sort_app.handlers;
 
+import ru.aston.sort_app.interfaces.SortCriteria;
 import ru.aston.sort_app.model.Movie;
 import ru.aston.sort_app.utils.BinarySearch;
-import ru.aston.sort_app.utils.MovieSorter;
+import ru.aston.sort_app.utils.QuickSort;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,8 +13,7 @@ public enum SearchStrategy {
 
     SEARCH_BY_ID("1", "Поиск по ID") {
         @Override
-        public void execute(List<Movie> movies, BinarySearch<Movie> binarySearch, MovieSorter movieSorter,
-                Scanner scanner) {
+        public void execute(List<Movie> movies, BinarySearch<Movie> binarySearch, Scanner scanner) {
             System.out.print("Введите ID фильма для поиска: ");
             try {
                 Long id = Long.parseLong(scanner.nextLine().trim());
@@ -21,16 +21,17 @@ public enum SearchStrategy {
 
                 Movie searchTarget = Movie.builder()
                         .id(id)
-                        .name("")
+                        .name("search")
                         .year(1900)
-                        .director("")
+                        .director("search")
                         .rate(0.0)
                         .build();
 
                 logger.info("Сортировка фильмов по ID для бинарного поиска");
-                movieSorter.sortById(movies);
+                QuickSort.sort(movies, SortCriteria.BY_ID.getComparator());
 
-                int index = binarySearch.search(movies.toArray(new Movie[0]), searchTarget);
+                int index = binarySearch.search(movies.toArray(new Movie[0]), searchTarget,
+                        (m1, m2) -> Long.compare(m1.getId(), m2.getId()));
 
                 if (index != -1) {
                     Movie foundMovie = movies.get(index);
@@ -51,8 +52,7 @@ public enum SearchStrategy {
 
     SEARCH_BY_NAME("2", "Поиск по названию") {
         @Override
-        public void execute(List<Movie> movies, BinarySearch<Movie> binarySearch, MovieSorter movieSorter,
-                Scanner scanner) {
+        public void execute(List<Movie> movies, BinarySearch<Movie> binarySearch, Scanner scanner) {
             System.out.print("Введите название фильма для поиска: ");
             String name = scanner.nextLine().trim();
             logger.info("Поиск фильма по названию: " + name);
@@ -67,14 +67,15 @@ public enum SearchStrategy {
                     .id(0L)
                     .name(name)
                     .year(1900)
-                    .director("")
+                    .director("search")
                     .rate(0.0)
                     .build();
 
             logger.info("Сортировка фильмов по названию для бинарного поиска");
-            movieSorter.sortByName(movies);
+            QuickSort.sort(movies, SortCriteria.BY_NAME.getComparator());
 
-            int index = binarySearch.search(movies.toArray(new Movie[0]), searchTarget);
+            int index = binarySearch.search(movies.toArray(new Movie[0]), searchTarget,
+                    (m1, m2) -> m1.getName().compareTo(m2.getName()));
 
             if (index != -1) {
                 Movie foundMovie = movies.get(index);
@@ -90,8 +91,7 @@ public enum SearchStrategy {
 
     SEARCH_BY_YEAR("3", "Поиск по году") {
         @Override
-        public void execute(List<Movie> movies, BinarySearch<Movie> binarySearch, MovieSorter movieSorter,
-                Scanner scanner) {
+        public void execute(List<Movie> movies, BinarySearch<Movie> binarySearch, Scanner scanner) {
             System.out.print("Введите год выпуска фильма для поиска: ");
             try {
                 int year = Integer.parseInt(scanner.nextLine().trim());
@@ -99,16 +99,17 @@ public enum SearchStrategy {
 
                 Movie searchTarget = Movie.builder()
                         .id(0L)
-                        .name("")
+                        .name("search")
                         .year(year)
-                        .director("")
+                        .director("search")
                         .rate(0.0)
                         .build();
 
                 logger.info("Сортировка фильмов по году для бинарного поиска");
-                movieSorter.sortByYear(movies);
+                QuickSort.sort(movies, SortCriteria.BY_YEAR.getComparator());
 
-                int index = binarySearch.search(movies.toArray(new Movie[0]), searchTarget);
+                int index = binarySearch.search(movies.toArray(new Movie[0]), searchTarget,
+                        (m1, m2) -> Integer.compare(m1.getYear(), m2.getYear()));
 
                 if (index != -1) {
                     Movie foundMovie = movies.get(index);
@@ -129,8 +130,7 @@ public enum SearchStrategy {
 
     SEARCH_BY_DIRECTOR("4", "Поиск по режиссеру") {
         @Override
-        public void execute(List<Movie> movies, BinarySearch<Movie> binarySearch, MovieSorter movieSorter,
-                Scanner scanner) {
+        public void execute(List<Movie> movies, BinarySearch<Movie> binarySearch, Scanner scanner) {
             System.out.print("Введите имя режиссера для поиска: ");
             String director = scanner.nextLine().trim();
             logger.info("Поиск фильма по режиссеру: " + director);
@@ -143,16 +143,17 @@ public enum SearchStrategy {
 
             Movie searchTarget = Movie.builder()
                     .id(0L)
-                    .name("")
+                    .name("search")
                     .year(1900)
                     .director(director)
                     .rate(0.0)
                     .build();
 
             logger.info("Сортировка фильмов по режиссеру для бинарного поиска");
-            movieSorter.sortByDirector(movies);
+            QuickSort.sort(movies, SortCriteria.BY_DIRECTOR.getComparator());
 
-            int index = binarySearch.search(movies.toArray(new Movie[0]), searchTarget);
+            int index = binarySearch.search(movies.toArray(new Movie[0]), searchTarget,
+                    (m1, m2) -> m1.getDirector().compareTo(m2.getDirector()));
 
             if (index != -1) {
                 Movie foundMovie = movies.get(index);
@@ -168,8 +169,7 @@ public enum SearchStrategy {
 
     BACK_TO_MENU("0", "Назад в главное меню") {
         @Override
-        public void execute(List<Movie> movies, BinarySearch<Movie> binarySearch, MovieSorter movieSorter,
-                Scanner scanner) {
+        public void execute(List<Movie> movies, BinarySearch<Movie> binarySearch, Scanner scanner) {
             logger.info("Возврат в главное меню из бинарного поиска");
             System.out.println("Возврат в главное меню...");
         }
@@ -193,8 +193,7 @@ public enum SearchStrategy {
         return description;
     }
 
-    public abstract void execute(List<Movie> movies, BinarySearch<Movie> binarySearch, MovieSorter movieSorter,
-            Scanner scanner);
+    public abstract void execute(List<Movie> movies, BinarySearch<Movie> binarySearch, Scanner scanner);
 
     public static SearchStrategy fromChoice(String choice) {
         for (SearchStrategy strategy : values()) {

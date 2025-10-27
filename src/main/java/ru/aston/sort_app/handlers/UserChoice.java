@@ -7,7 +7,8 @@ public enum UserChoice {
     CloseApplication("0"),
     ReadMoviesFromFile("1"),
     WriteMoviesFromFile("2"),
-    BinarySearch("3");
+    SortMovies("3"),
+    BinarySearch("4");
 
     private final String userInput;
 
