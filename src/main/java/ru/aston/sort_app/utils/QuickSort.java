@@ -7,7 +7,7 @@ import java.util.concurrent.*;
 
 public class QuickSort {
 
-    private static final int SEQUENTIAL_THRESHOLD = 10000;
+    private static final int SEQUENTIAL_THRESHOLD = 50;
     private static ExecutorService executor;
 
     public static <T> void sort(List<T> list, Comparator<T> comparator) {
