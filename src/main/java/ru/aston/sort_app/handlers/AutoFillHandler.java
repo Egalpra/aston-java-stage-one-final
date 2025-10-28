@@ -48,7 +48,7 @@ public class AutoFillHandler implements UserChoiceHandler {
         }
 
         LOGGER.info("Автозаполнение завершено. Добавлено " + count + " фильмов.");
-        System.out.println("Готово! Добавлено " + count + " случайных фильмов.");
+        LOGGER.info("Готово! Добавлено " + count + " случайных фильмов.");
     }
 
     private int readPositiveInt(int min, int max) {
@@ -59,9 +59,9 @@ public class AutoFillHandler implements UserChoiceHandler {
                 if (value >= min && value <= max) {
                     return value;
                 }
-                System.out.printf("Пожалуйста, введите число от " + min +  "до " + max);
+                LOGGER.info("Пожалуйста, введите число от " + min +  "до " + max);
             } catch (NumberFormatException e) {
-                System.out.println("Неверный формат. Введите целое число:");
+                LOGGER.info("Неверный формат. Введите целое число:");
             }
         }
     }
