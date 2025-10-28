@@ -9,7 +9,8 @@ public enum UserChoice {
     WriteMoviesFromFile("2"),
     SortMovies("3"),
     BinarySearch("4"),
-    ManualFill("5");
+    ManualFill("5"),
+    AutoFill("6");
 
     private final String userInput;
 

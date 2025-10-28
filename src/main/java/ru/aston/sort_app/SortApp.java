@@ -23,6 +23,7 @@ public class SortApp {
         handlerMap.put(UserChoice.SortMovies, new SortHandler(movies));
         handlerMap.put(UserChoice.BinarySearch, new BinarySearchHandler(movies));
         handlerMap.put(UserChoice.ManualFill, new ManualFillHandler(movies, scanner));
+        handlerMap.put(UserChoice.AutoFill, new AutoFillHandler(movies, scanner));
     }
 
     public void run() {
@@ -62,6 +63,7 @@ public class SortApp {
         menu.append("\n" + UserChoice.SortMovies.getUserInput() + " - Сортировка фильмов");
         menu.append("\n" + UserChoice.BinarySearch.getUserInput() + " - Бинарный поиск фильмов");
         menu.append("\n" + UserChoice.ManualFill.getUserInput() + " - Ручная запись");
+        menu.append("\n" + UserChoice.AutoFill.getUserInput() + " - Автозаполнение");
 
         logger.info(menu.toString());
     }
