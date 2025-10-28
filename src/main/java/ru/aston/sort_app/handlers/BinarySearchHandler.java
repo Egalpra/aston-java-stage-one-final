@@ -23,17 +23,19 @@ public class BinarySearchHandler implements UserChoiceHandler {
     @Override
     public void handle() {
         if (movies.isEmpty()) {
-            System.out.println("Список фильмов пуст. Сначала загрузите фильмы из файла.");
+            logger.warning("Список фильмов пуст. Сначала загрузите фильмы из файла.");
             return;
         }
 
-        logger.info("Запуск бинарного поиска фильмов");
-        System.out.println("\n=== Бинарный поиск фильмов ===");
-        System.out.println("Выберите критерий поиска:");
+        logger.info("\n=== Бинарный поиск фильмов ===");
+        logger.info("Выберите критерий поиска:");
 
+        StringBuilder sb = new StringBuilder();
         for (SearchStrategy strategy : SearchStrategy.values()) {
-            System.out.println(strategy.getChoice() + " - " + strategy.getDescription());
+            sb.append(strategy.getChoice() + " - " + strategy.getDescription() + "\n");
         }
+
+        logger.info(sb.toString());
 
         String choice = scanner.nextLine().trim();
         logger.info("Пользователь выбрал критерий поиска: " + choice);
@@ -45,7 +47,6 @@ public class BinarySearchHandler implements UserChoiceHandler {
             strategy.execute(movies, binarySearch, scanner);
         } else {
             logger.warning("Неверный выбор пользователя: " + choice);
-            System.out.println("Неверный выбор. Попробуйте снова.");
         }
     }
 }

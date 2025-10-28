@@ -22,19 +22,24 @@ public class SortHandler implements UserChoiceHandler {
     @Override
     public void handle() {
         if (movies.isEmpty()) {
-            System.out.println("Список фильмов пуст. Сначала загрузите фильмы из файла.");
+            logger.info("Список фильмов пуст. Сначала загрузите фильмы из файла.");
             return;
         }
 
         logger.info("Запуск сортировки фильмов");
-        System.out.println("\n=== Сортировка фильмов ===");
-        System.out.println("Выберите критерий сортировки:");
-        System.out.println("1 - По ID");
-        System.out.println("2 - По названию");
-        System.out.println("3 - По году");
-        System.out.println("4 - По режиссеру");
-        System.out.println("5 - По рейтингу");
-        System.out.println("0 - Назад в главное меню");
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("\n=== Сортировка фильмов ===");
+        sb.append("\nВыберите критерий сортировки:");
+        sb.append("\n1 - По ID");
+        sb.append("\n2 - По названию");
+        sb.append("\n3 - По году");
+        sb.append("\n4 - По режиссеру");
+        sb.append("\n5 - По рейтингу");
+        sb.append("\n0 - Назад в главное меню");
+
+        logger.info(sb.toString());
 
         String choice = scanner.nextLine().trim();
         logger.info("Пользователь выбрал критерий сортировки: " + choice);
@@ -44,14 +49,12 @@ public class SortHandler implements UserChoiceHandler {
         if (criteria != null) {
             logger.info("Сортировка фильмов по критерию: " + criteria.getDescription());
             QuickSort.sort(movies, criteria.getComparator());
-            System.out.println("Фильмы отсортированы по " + criteria.getDescription().toLowerCase());
-            System.out.println("Количество отсортированных элементов: " + movies.size());
+            logger.info("Фильмы отсортированы по " + criteria.getDescription().toLowerCase());
+            logger.info("Количество отсортированных элементов: " + movies.size());
         } else if ("0".equals(choice)) {
             logger.info("Возврат в главное меню из сортировки");
-            System.out.println("Возврат в главное меню...");
         } else {
             logger.warning("Неверный выбор пользователя: " + choice);
-            System.out.println("Неверный выбор. Попробуйте снова.");
         }
     }
 
