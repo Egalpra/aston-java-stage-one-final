@@ -44,7 +44,7 @@ public class SortApp {
 
                 handler.handle();
             } catch (IllegalArgumentException ex) {
-                System.out.println(ex.getMessage());
+                logger.info(ex.getMessage());
             }
         }
     }
@@ -63,7 +63,6 @@ public class SortApp {
         menu.append("\n" + UserChoice.BinarySearch.getUserInput() + " - Бинарный поиск фильмов");
         menu.append("\n" + UserChoice.ManualFill.getUserInput() + " - Ручная запись");
 
-        System.out.println(menu);
         logger.info(menu.toString());
     }
 }
