@@ -13,6 +13,7 @@ public class AutoFillHandler implements UserChoiceHandler {
     private static final Logger LOGGER = Logger.getLogger(AutoFillHandler.class.getName());
     private final List<Movie> movies;
     private final Scanner scanner;
+    private final Random random = new Random();
 
     private final List<String> directors = new ArrayList<>(Arrays.asList(
             "Андрей Тарковский", "Сергей Эйзенштейн", "Никита Михалков", "Эльдар Рязанов",
@@ -29,9 +30,6 @@ public class AutoFillHandler implements UserChoiceHandler {
             "Брат", "Брат 2", "Ночной дозор", "9 рота", "Сталинград"
     );
 
-    private final Random random = new Random();
-
-    /** Конструктор получает уже существующий сканер из SortApp */
     public AutoFillHandler(List<Movie> movies, Scanner scanner) {
         this.movies = movies;
         this.scanner = scanner;
@@ -40,11 +38,8 @@ public class AutoFillHandler implements UserChoiceHandler {
     @Override
     public void handle() {
         LOGGER.info("=== Запуск автозаполнения ===");
-
-        System.out.println("Сколько фильмов сгенерировать? (введите число от 1 до 1000)");
+        LOGGER.info("Сколько фильмов сгенерировать? (введите число от 1 до 1000)");
         int count = readPositiveInt(1, 1000);
-
-        movies.clear();                                   // очищаем старый список
 
         for (long id = 1; id <= count; id++) {
             Movie movie = generateRandomMovie(id);
@@ -52,11 +47,10 @@ public class AutoFillHandler implements UserChoiceHandler {
             LOGGER.info("Добавлен фильм: " + movie.getName() + " (ID=" + id + ")");
         }
 
-        LOGGER.info(String.format("Автозаполнение завершено. Добавлено %d фильмов.", count));
+        LOGGER.info("Автозаполнение завершено. Добавлено " + count + " фильмов.");
         System.out.println("Готово! Добавлено " + count + " случайных фильмов.");
     }
 
-    /** Чтение целого положительного числа в заданном диапазоне */
     private int readPositiveInt(int min, int max) {
         while (true) {
             String line = scanner.nextLine().trim();
@@ -65,19 +59,18 @@ public class AutoFillHandler implements UserChoiceHandler {
                 if (value >= min && value <= max) {
                     return value;
                 }
-                System.out.printf("Пожалуйста, введите число от %d до %d:%n", min, max);
+                System.out.printf("Пожалуйста, введите число от " + min +  "до " + max);
             } catch (NumberFormatException e) {
                 System.out.println("Неверный формат. Введите целое число:");
             }
         }
     }
 
-    /** Генерация одного фильма */
     private Movie generateRandomMovie(long id) {
         String name = titlePool.get(random.nextInt(titlePool.size()));
-        int year = 1950 + random.nextInt(75);               // 1950‑2024
+        int year = 1950 + random.nextInt(75);
         String director = directors.get(random.nextInt(directors.size()));
-        double rate = 5.0 + random.nextDouble() * 5.0;       // 5.0‑10.0
+        double rate = 0.0 + random.nextDouble() * 5.0;
 
         return Movie.builder()
                 .id(id)
@@ -89,6 +82,6 @@ public class AutoFillHandler implements UserChoiceHandler {
     }
 
     private double roundToOneDecimal(double value) {
-        return Math.round(value * 10.0) / 10.0;
+        return Math.round(value * 5.0) / 5.0;
     }
 }
