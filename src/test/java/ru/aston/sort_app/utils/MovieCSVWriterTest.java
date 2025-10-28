@@ -20,9 +20,9 @@ class MovieCSVWriterTest {
 
     private static final List<Movie> movies;
     private static String CSVContent =
-                    "1,\"The Shadow of Olympus\",2000,\"Ethan Hawke\",8,5\n" +
-                    "2,\"Whispers in the Wind\",1998,\"Sofia Coppola\",7,2\n" +
-                    "3,\"Crimson Tide\",2021,\"Spike Lee\",9,1";
+                    "1,\"The Shadow of Olympus\",2000,\"Ethan Hawke\",8.5\n" +
+                    "2,\"Whispers in the Wind\",1998,\"Sofia Coppola\",7.2\n" +
+                    "3,\"Crimson Tide\",2021,\"Spike Lee\",9.1";
 
     @TempDir
     private File tempDir;
@@ -65,7 +65,7 @@ class MovieCSVWriterTest {
 
         writer.writeMovies(movies);
 
-        String expected = oldContent + CSVContent;
+        String expected = oldContent  + CSVContent;
 
         try (Stream<String> lines = Files.lines(tempFile)) {
             assertEquals(expected, lines.collect(Collectors.joining("\n")));
