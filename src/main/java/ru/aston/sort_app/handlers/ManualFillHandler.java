@@ -16,10 +16,10 @@ public class ManualFillHandler implements UserChoiceHandler {
     @Override
     public void handle() {
         LOGGER.info("Начало ручного ввода данных о фильмах");
-        LOGGER.info("Введите данные фильма (для завершения ввода оставте название пустым");
+        LOGGER.info("Введите данные фильма (для завершения ввода оставте название пустым)");
         while (true) {
             try {
-                LOGGER.info("Название фильма (или пустая строка для завершения");
+                LOGGER.info("Название фильма (или пустая строка для завершения)");
                 String name = scanner.nextLine().trim();
                 if (name.isEmpty()) {
                     LOGGER.info("Ручной ввод данных о фильмах завершен");
@@ -66,7 +66,6 @@ public class ManualFillHandler implements UserChoiceHandler {
                         .build();
                 movies.add(movie);
                 LOGGER.info("Добавлен фильм: " + movie.getName());
-                LOGGER.info("Фильм успешно добавлен: " + movie.getName());
             } catch (IllegalStateException e) {
                 LOGGER.severe("Ошибка валидации: " + e.getMessage());
                 LOGGER.info("Ошибка валидации: " + e.getMessage());
